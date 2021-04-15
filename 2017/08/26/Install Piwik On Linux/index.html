@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Install Piwik On Linux · Tianyun Shan</title><meta name="description" content="Install Piwik On Linux - Tianyun Shan"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.jerryshan.com/atom.xml" title="Tianyun Shan"><meta name="generator" content="Hexo 5.4.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Install Piwik On Linux</h1><div class="post-info">Aug 26, 2017</div><div class="post-content"><p>Need to create an analytics server for the mobile app I made. I choose Piwik to self-host all the data in my own server. This is the full notes I made during the setup.</p>
+<span id="more"></span>
+
+<h1 id="Create-Server"><a href="#Create-Server" class="headerlink" title="Create Server"></a>Create Server</h1><p>The server I use is form digital ocean. Operating system is Ubuntu. I created a Linux droplet from digital ocean.</p>
+<h2 id="Server-“LAMP”-Install"><a href="#Server-“LAMP”-Install" class="headerlink" title="Server “LAMP” Install"></a>Server “LAMP” Install</h2><p>First login to server using the default password. Then change the password and re-login to the server.</p>
+<p>Then follow <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04">this guild</a> to install. The guild is included in this documentation.</p>
+<h3 id="Install-Apache-and-Allow-Firewall"><a href="#Install-Apache-and-Allow-Firewall" class="headerlink" title="Install Apache and Allow Firewall"></a>Install Apache and Allow Firewall</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install apache2</span><br></pre></td></tr></table></figure>
+
+<h3 id="Set-Global-ServerName-to-Suppress-Syntax-Warnings"><a href="#Set-Global-ServerName-to-Suppress-Syntax-Warnings" class="headerlink" title="Set Global ServerName to Suppress Syntax Warnings"></a>Set Global ServerName to Suppress Syntax Warnings</h3><p>Use the following command to check the Apache config syntax. If you do not set the server name, there will be a warning.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apache2ctl configtest</span><br></pre></td></tr></table></figure>
+
+<p>Now in order to surpass the warning, we need to go to following file and add <code>ServerName</code> variable to it.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apache2/apache2.conf</span><br></pre></td></tr></table></figure>
+
+<p>Go to the end of the file and add the following line.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServerName server_domain_or_IP</span><br></pre></td></tr></table></figure>
+
+<p>For <code>server_domain_or_IP</code> If you have a domain name, use the domain name there. If not, use the ip address for the server.</p>
+<p>Now we can retest the config and it will only return <code>Syntax OK</code>. Now restart Apache.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart apache2</span><br></pre></td></tr></table></figure>
+
+<h3 id="Adjust-the-Firewall-to-Allow-Web-Traffic"><a href="#Adjust-the-Firewall-to-Allow-Web-Traffic" class="headerlink" title="Adjust the Firewall to Allow Web Traffic"></a>Adjust the Firewall to Allow Web Traffic</h3><p>When following the guide it talks about allow UFW firewall for both HTTP and HTTPS traffics. First make sure that UFW has an application profile for Apache:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw app list</span><br></pre></td></tr></table></figure>
+
+<p>And we should get the following result:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Output:</span></span><br><span class="line">Available applications:</span><br><span class="line">Apache</span><br><span class="line">Apache Full</span><br><span class="line">Apache Secure</span><br><span class="line">OpenSSH</span><br></pre></td></tr></table></figure>
+
+<p>If look at <code>Apache Full</code> profile, it should show that it enables traffic to ports 80 and 443:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw app into <span class="string">&quot;Apache Full&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Here is the result</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Output</span></span><br><span class="line">Profile: Apache Full</span><br><span class="line">Title: Web Server (HTTP,HTTPS)</span><br><span class="line">Description: Apache v2 is the next generation of the omnipresent Apache web</span><br><span class="line">server.</span><br><span class="line"></span><br><span class="line">Ports:</span><br><span class="line">  80,443/tcp</span><br></pre></td></tr></table></figure>
+
+<p>Now we need to allow incoming traffic for this profile:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow <span class="keyword">in</span> <span class="string">&quot;Apache Full&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Now we can do a spot check right away to verify that everything went as planned by visiting your server&#39;s public IP address in web browser</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://your_server_IP_address</span><br></pre></td></tr></table></figure>
+
+<p>You can see a default Ubuntu Apache web page. Now your web server is correctly installed and accessible through the firewall.</p>
+<h3 id="Install-MySQL"><a href="#Install-MySQL" class="headerlink" title="Install MySQL"></a>Install MySQL</h3><p>Now that we have our web server up and running, it is time to install MySQL.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server</span><br></pre></td></tr></table></figure>
+
+<p>When installation is complete, we want to run a simple security script that will remove some dangerous defaults and lock down access to our database system a little bit. Start the interactive script by running:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
+
+<p>We can enter database manually using following command.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -p</span><br></pre></td></tr></table></figure>
+
+<p>At this point, the database system is now setup and we can move on.</p>
+<h3 id="Install-PHP"><a href="#Install-PHP" class="headerlink" title="Install PHP"></a>Install PHP</h3><p>Use the following command to install <code>PHP</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql</span><br></pre></td></tr></table></figure>
+
+<p>Now we want to make Apache first look for <code>index.php</code>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apache2/mods-enabled/dir.conf</span><br></pre></td></tr></table></figure>
+
+<p>Look for <code>index.php</code>, move it to the first place like image below.</p>
+<p><img src="20170826_180022_48233IRl.png"></p>
+<p>Now restart Apache</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart apache2</span><br></pre></td></tr></table></figure>
+
+<h3 id="Install-PHP-Modules"><a href="#Install-PHP-Modules" class="headerlink" title="Install PHP Modules"></a>Install PHP Modules</h3><p>Currently I don’t know what additional modules we need to install, so I will leave this empty for now. Will adding content to here if anything I found is necessary.</p>
+<h3 id="Test-PHP"><a href="#Test-PHP" class="headerlink" title="Test PHP"></a>Test PHP</h3><p>Now finally, we need to test that php we installed works. Here is how. Add a <code>info.php</code> under the web document directory to print out php information.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /var/www/html/info.php</span><br><span class="line"></span><br><span class="line"><span class="comment"># add following code into info.php</span></span><br><span class="line">&lt;?php</span><br><span class="line">phpinfo()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Now save and close file. Visit <code>http://server_ip/info.php</code>. It will show a php info page.</p>
+<h3 id="Finished"><a href="#Finished" class="headerlink" title="Finished"></a>Finished</h3><p>Now we have finished install LAMP stack.</p>
+<h3 id="Change-Default-WWW-Directory"><a href="#Change-Default-WWW-Directory" class="headerlink" title="Change Default WWW Directory"></a>Change Default WWW Directory</h3><p>In case that you want to change config to a different directory, <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-debian-8">this guide</a> can be useful.</p>
+<p>Right now the default directory is <code>/var/www/html</code>. I think it does not need to change that default directory. So has not tired that guide yet.</p>
+<h1 id="Install-Piwik"><a href="#Install-Piwik" class="headerlink" title="Install Piwik"></a>Install Piwik</h1><p>Download Piwik zip file and upload to server and unzip. If you want to visit analytic site using default address, unzip everything under root. Do not need to have Piwik directory there. If you want to visit site under <code>https://ip/piwik</code>, then keep the <code>piwik</code> folder and all files goes under that folder.</p>
+<p>Now visit the site. You will see an error occurred. We need to set the permission for the folder. Just follow the instruction will be fine. Note there are 7 lines there. Do not paste them at once. Do it one by one. You might find that some directory not exists. That might be normal. I have this issue on test build as well.</p>
+<p>After set permissions, refresh site.</p>
+<h2 id="Error-Solving"><a href="#Error-Solving" class="headerlink" title="Error Solving"></a>Error Solving</h2><p>At this stage, when go to the self-hosted Piwik site, we should be able to see the install wizard when accessing the site. <code>http://server_ip</code></p>
+<p>Press <code>NEXT</code> and solve all the errors display in this page.</p>
+<h3 id="mbstring"><a href="#mbstring" class="headerlink" title="mbstring"></a>mbstring</h3><p>Open php.ini</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># find config path using</span></span><br><span class="line">php --ini</span><br><span class="line"></span><br><span class="line"><span class="comment"># edit php.ini, if different path, use path showing after running above command</span></span><br><span class="line">vim /etc/php/7.0/cli/php.ini</span><br><span class="line"><span class="comment"># search for mbstring.func_overload</span></span><br><span class="line"><span class="comment"># remove the ; before that line</span></span><br></pre></td></tr></table></figure>
+
+<p>Install php-mbstring plugin</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install php-mbstring</span><br></pre></td></tr></table></figure>
+
+<p>Now restart Apache</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart apache2</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dom-amp-Simple-XML"><a href="#Dom-amp-Simple-XML" class="headerlink" title="Dom &amp; Simple XML"></a>Dom &amp; Simple XML</h3><p>Install dom extension</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install php-dom</span><br></pre></td></tr></table></figure>
+
+<p>Install simple xml extension</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install php-simplexml</span><br><span class="line">apt-get install php-xml</span><br></pre></td></tr></table></figure>
+
+<p>Now restart Apache</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart apache2</span><br></pre></td></tr></table></figure>
+
+<h2 id="Database-Setup"><a href="#Database-Setup" class="headerlink" title="Database Setup"></a>Database Setup</h2><p>Create a local database user</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#login to mysql root</span></span><br><span class="line">mysql --user=root -p</span><br><span class="line"></span><br><span class="line"><span class="comment">#enter root password</span></span><br><span class="line"><span class="comment">#create local user account in mysql</span></span><br><span class="line"></span><br><span class="line">mysql&gt; create user <span class="string">&#x27;piwik&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> identified by <span class="string">&#x27;_PASSWORD_&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">#_PASSWORD_ is located inside lastpass.</span></span><br></pre></td></tr></table></figure>
+
+<p>Create a database for piwik</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#login to mysql root</span></span><br><span class="line">mysql --user=root -p</span><br><span class="line"></span><br><span class="line"><span class="comment">#enter root password</span></span><br><span class="line"><span class="comment">#create database</span></span><br><span class="line">mysql&gt; create database piwik;</span><br><span class="line"></span><br><span class="line"><span class="comment">#check</span></span><br><span class="line">mysql&gt; show databases;</span><br></pre></td></tr></table></figure>
+
+<p>Now enter the user, password, database name you just created into the website wizard database setup area.</p>
+<p>Now give permission to newly created user piwik</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#login to mysql root</span></span><br><span class="line">mysql --user=root -p</span><br><span class="line"></span><br><span class="line"><span class="comment">#enter root password</span></span><br><span class="line"><span class="comment">#give permission</span></span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON * . * TO <span class="string">&#x27;piwik&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure>
+
+<p>Now press next, should have no problem and will lead to next page with table create success message.</p>
+<h2 id="Setup-a-Website"><a href="#Setup-a-Website" class="headerlink" title="Setup a Website"></a>Setup a Website</h2><p>Website name should be application id in android app or bundle id in iOS app.</p>
+<p>Website URL can be anything.</p>
+<p>Website time zone is Toronto.</p>
+<p>Not an Ecommerce site.</p>
+<h1 id="Setup-SSL"><a href="#Setup-SSL" class="headerlink" title="Setup SSL"></a>Setup SSL</h1><p>If press the setting icon you can see a warning saying using HTTP can be risky, recommend setup using SSL. There are two ways to setup SSL, self-assign for the test server or use a real certificate.</p>
+<p>Currently I am building the piwik on a test server and I do not have the certificate for my company. So I self-assign one for temporary use. I plan to replace the company certificate after I got to office on Monday.</p>
+<h2 id="Self-Assign"><a href="#Self-Assign" class="headerlink" title="Self Assign"></a>Self Assign</h2><p>I was following <a target="_blank" rel="noopener" href="https://www.akadia.com/services/ssh_test_certificate.html">this guide</a> to create and self assign the certificate.</p>
+<h3 id="Generate-Private-Key"><a href="#Generate-Private-Key" class="headerlink" title="Generate Private Key"></a>Generate Private Key</h3><p>Create RSA private key.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -des3 -out server.key 1024</span><br></pre></td></tr></table></figure>
+
+<p>Enter the PEM pass phrase. Create the password for that. Already written inside lastpass notes section.</p>
+<h3 id="Generate-a-CSR"><a href="#Generate-a-CSR" class="headerlink" title="Generate a CSR"></a>Generate a CSR</h3><p>Self-assign CSR.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -key server.key -out server.csr</span><br></pre></td></tr></table></figure>
+
+<p>There are several key point that needs to pay attention to when generate the CSR.</p>
+<ol>
+<li> Common Name: this needs to be the server&#39;s hostname. if the website address is <a target="_blank" rel="noopener" href="https://public.akadia.com/">https://public.akadia.com</a>, then common name will be <code>public.akadia.com</code></li>
+<li> A challenge password: Create another password for this field. This is noted inside lastpass as well.</li>
+</ol>
+<h3 id="Remove-Passphrase-from-key"><a href="#Remove-Passphrase-from-key" class="headerlink" title="Remove Passphrase from key"></a>Remove Passphrase from key</h3><p>One downside is every time Apache starts up, it will ask to enter the pass-phrase. This is very inconvenient. We can remove pass-phrase using the following command.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp server.key server.key.org</span><br><span class="line">openssl rsa -<span class="keyword">in</span> server.key.org -out server.key</span><br></pre></td></tr></table></figure>
+
+<p>Something needs to notice: after removing the pass-phrase, the private key file should only be readable from the root user. which means its user permission should be <code>-rw-r--r--</code> user and user group should both be root. This should be the default case. Another thing is if anyone else get the private key, it will be very dangerous, we should revoke the key.</p>
+<h3 id="Generating-Self-Signed-Certificate"><a href="#Generating-Self-Signed-Certificate" class="headerlink" title="Generating Self-Signed Certificate"></a>Generating Self-Signed Certificate</h3><p>Now we want to generate a self-signed certificate. Because this is a test server and I don&#39;t plan to have certificate signed by a CA. If you are waiting the certificate signed by a CA, you can self-signed first to test the SSL setup.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -days 365 -<span class="keyword">in</span> server.csr -signkey server.key -out server.crt</span><br></pre></td></tr></table></figure>
+
+<h3 id="Enable-Apache-SSL-Module"><a href="#Enable-Apache-SSL-Module" class="headerlink" title="Enable Apache SSL Module"></a>Enable Apache SSL Module</h3><p>Take a look to make sure <code>SSL Module</code> has not enabled. If already enabled, we can skip this section.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ll /etc/apache2/mods-enabled</span><br></pre></td></tr></table></figure>
+
+<p>If <code>ssl.conf</code> and <code>ssl.load</code> are there, then it is already enabled, if not, take a look at <code>/etc/apache2/mods-available</code>. If those two files are there, then <code>mod_ssl</code> is installed. What we need to do is just enable it using the following command.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a2enmod ssl</span><br></pre></td></tr></table></figure>
+
+<p>Now restart server using <code>sudo systemctl restart apache2</code>.</p>
+<h3 id="Config-Apache-to-Accept-Certificates"><a href="#Config-Apache-to-Accept-Certificates" class="headerlink" title="Config Apache to Accept Certificates"></a>Config Apache to Accept Certificates</h3><p>Move generated .crt files and .key files to <code>/etc/ssl/crt</code>.</p>
+<p>vim <code>/etc/apache2/mods-enabled/ssl.conf</code>, append following to the end of file.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost 138.197.161.209:443&gt;</span><br><span class="line">DocumentRoot /var/www/html</span><br><span class="line">ServerName 138.197.161.209</span><br><span class="line">SSLEngine on</span><br><span class="line">SSLCertificateFile /etc/ssl/crt/server.crt</span><br><span class="line">SSLCertificateKeyFile /etc/ssl/crt/server.key</span><br><span class="line">SSLCertificateChainFile /etc/ssl/crt/intermediate.crt</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Several things needs to be noted. The server name can be different. If we have a domain name, use the domain name for <code>ServerName</code>.</p>
+<p><code>SSLCertificateChainFile</code> can be omitted if the certificate is self-assigned. This should be the intermediate certificate file (if any) that was supplied by the certificate authority (CA).</p>
+<p>Make sure the <code>DocumentRoot</code> is correct directory that you host the website.</p>
+<p>Now, restart the Apache using <code>sudo systemctl restart apache2</code>.</p>
+<h1 id="Additional-Setup"><a href="#Additional-Setup" class="headerlink" title="Additional Setup"></a>Additional Setup</h1><p>Here is some additional setup that is preferred to setup on the Piwik server.</p>
+<h2 id="Force-SSL"><a href="#Force-SSL" class="headerlink" title="Force SSL"></a>Force SSL</h2><p>There are two ways to force SSL connection. See <a target="_blank" rel="noopener" href="https://piwik.org/faq/how-to/faq_91/">here</a> for details. One is to install <code>Force SSL</code> plugin inside the market place. The second is to set <code>force_ssl = 1</code> inside <code>piwik/config/config.ini.php</code> file</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/11/09/Import%20Third-Party%20Objective-C%20Framework%20into%20Swift%20Framework%20Project/" class="prev">PREV</a><a href="/2017/05/19/Repeated%20Animation/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2021 <a href="http://blog.jerryshan.com">Tianyun Shan</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

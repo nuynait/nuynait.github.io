@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> SSH Key · Tianyun Shan</title><meta name="description" content="SSH Key - Tianyun Shan"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.jerryshan.com/atom.xml" title="Tianyun Shan"><meta name="generator" content="Hexo 5.4.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">SSH Key</h1><div class="post-info">Jun 13, 2016</div><div class="post-content"><p>Here everything related ssh keys.</p>
+<span id="more"></span>
+
+<h1 id="Generate-a-new-SSH-key"><a href="#Generate-a-new-SSH-key" class="headerlink" title="Generate a new SSH key"></a>Generate a new SSH key</h1><p>When generating ssh key, you are generating two key files, a private key and a public key file.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>This creates ssh key using provided email address as a label. If you choose to save to the default location, you can see result files under <code>~/.ssh/</code> folder, <code>id_rsa</code> as private key and <code>id_rsa.pub</code> as public key.</p>
+<p>If don’t want to provide email address as label, the simplest command is:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Why-passphrase-for-SSH-key"><a href="#Why-passphrase-for-SSH-key" class="headerlink" title="Why passphrase for SSH key"></a>Why passphrase for SSH key</h1><p>What is passphrase? Why do we need that?</p>
+<p>If you can make sure the secure of your private key, then a passphrase is not needed. However, if your private key is not secure enough, or you may need to share your private key with other people (friends), you will need to setup a passphrase.</p>
+<h2 id="Detail-example"><a href="#Detail-example" class="headerlink" title="Detail example:"></a>Detail example:</h2><p>Assume that you didn’t set a passphrase while creating your keys. Now you will copy your public key to all the machines where you want to login by issuing <code>ssh-copy-id -i ~/.ssh/id_rsa.pub user@somehost</code>. Now, with your keys, you will be able to login to all the machines where you copied your keys.</p>
+<p>Since you didn’t create a passphrase, anyone who gets your private key can login to all the machines where your public key is added. Assume you let your machine to be used by some of your friends and one of him is evil-minded. To prevent this, you set a passphrase to your private key. So whenever you login using your key, you will be prompted for the passphrase and so only you(who knows the passphrase) can login.</p>
+<p>But it becomes cumbersome to type the passphrase whenever you login to other machines. So you can give your passphrase to ssh-agent once and it will use it whenever required. You use ssh-add to give your keys to ssh-agent. You can always check what all keys your ssh-agent is managing by issuing <code>ssh-add -l</code>.</p>
+<h1 id="Avoid-entering-passphrase-every-time"><a href="#Avoid-entering-passphrase-every-time" class="headerlink" title="Avoid entering passphrase every time"></a>Avoid entering passphrase every time</h1><p>First start the <code>ssh-agent</code> in the background. If you’re using macOS Sierra 10.12.2 or later, you will need to modify your <code>~/.ssh/config</code> file to automatically load keys into the <code>ssh-agent</code> and store passphrase in your keychain.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line"> AddKeysToAgent yes</span><br><span class="line"> UseKeychain yes</span><br><span class="line"> IdentityFile ~&#x2F;.ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
+
+<p>Add your SSH private key to the ssh-agent and store your passphrase in the keychain. If you created your key with a different name, or if you are adding an existing key that has a different name, replace <code>id_rsa</code> in the command with the name of your private key file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add -K ~&#x2F;.ssh&#x2F;id_rsa</span><br></pre></td></tr></table></figure>
+
+<h1 id="Copy-public-key-to-server"><a href="#Copy-public-key-to-server" class="headerlink" title="Copy public key to server"></a>Copy public key to server</h1><p>If you are using ssh key to perform ssh authentication, you will need to copy your public key to server. Here is how.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id demo@198.51.100.0</span><br></pre></td></tr></table></figure>
+
+<p><strong>NOTE:</strong> On Mac,  <code>ssh-copy-id</code> is not installed by default. You can install via Homebrew. <code>brew install ssh-copy-id</code></p>
+<p>Alternatively, you can also copy over the keys using ssh.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~&#x2F;.ssh&#x2F;id_rsa.pub | ssh demo@198.51.100.0 &quot;mkdir -p ~&#x2F;.ssh &amp;&amp; chmod 700 ~&#x2F;.ssh &amp;&amp; cat &gt;&gt;  ~&#x2F;.ssh&#x2F;authorized_keys&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Disable-password-login"><a href="#Disable-password-login" class="headerlink" title="Disable password login"></a>Disable password login</h1><p>This is optional.</p>
+<blockquote>
+<p>Make sure you can login using your ssh key, and make sure your ssh will be safe and never lost. After disable password login, your ssh key is the only way to authenticate.  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim &#x2F;etc&#x2F;ssh&#x2F;sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>Within <code>/etc/ssh/sshd_config</code>, change the following line.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermitRootLogin without-password</span><br></pre></td></tr></table></figure>
+
+<p>Run following command to put change into effect.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl reload sshd.service</span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/">Generating a new SSH key and adding it to the ssh-agent - User Documentation</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2">How To Set Up SSH Keys | DigitalOcean</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/22272892">What is the difference between ssh-add and ssh-agent? - Stack Overflow</a></li>
+</ol>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/10/19/Spacemacs%20Config%20-%20How%20I%20Organize%20Tasks%20and%20Notes/" class="prev">PREV</a></div><div class="copyright"><p>© 2015 - 2021 <a href="http://blog.jerryshan.com">Tianyun Shan</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

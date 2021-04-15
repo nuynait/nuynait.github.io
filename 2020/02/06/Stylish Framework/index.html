@@ -1,0 +1,415 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Stylish Framework · Tianyun Shan</title><meta name="description" content="Stylish Framework - Tianyun Shan"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://blog.jerryshan.com/atom.xml" title="Tianyun Shan"><meta name="generator" content="Hexo 5.4.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/sunchongsheng" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/pinggod" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Stylish Framework</h1><div class="post-info">Feb 6, 2020</div><div class="post-content"><p>In Kinetic Commerce, we use Stylish to able to switch different styles for <code>UILabel</code>, <code>UIView</code>, <code>UITextView</code>, etc. It makes switch different styles use different font, color, very easy. All you need to do is create a style sheet and use the styles you created inside style sheet when you setup a view.</p>
+<span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/daniel-hall/Stylish">daniel-hall/Stylish</a></p>
+<h1 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h1><p>To install Stylish:</p>
+<ul>
+<li><p>Adds Stylish as a git sub-module. Run below command in your project root folder, where you do <code>pod init</code> or where <code>.xcodeproj</code> file locates.</p>
+<pre><code>  git submodule add https://github.com/daniel-hall/Stylish.git
+</code></pre>
+</li>
+<li><p>Open your project (<code>.xcworkspace</code>)  in Xcode, Select Files &gt; Add Files To “…”, then choose the <code>Stylish/Stylish.xcodeproj</code> adds into the project root tree.</p>
+<p>  <img src="CleanShot_2020-02-08_at_10.23.002x.png"></p>
+</li>
+<li><p>Select your project, general tab, in the framework area adds the Stylish framework thats come with the <code>Stylish.xcodeproj</code>.</p>
+<p>  <img src="CleanShot_2020-02-08_at_10.28.352x.png"></p>
+</li>
+<li><p>In your project, you need to extend and override <code>prepareForInterfaceBuilder</code> in <code>UIView</code> and <code>StyleableUIView</code> if you want to have live style rendering in Interface Builder storyboards. Put following code in your project. You can create a <code>StylishExtension.swift</code> file if needed.</p>
+<pre><code>  /*
+   #### IMPORTANT!! ####
+   The below two extensions must always be defined in the an app that is using
+   Stylish if you want to have live style rendering in Interface Builder storyboards.
+   */
+  extension UIView &#123;
+      // This is the only entry point for setting global variables
+          // in Stylish for Interface Builder rendering (since App Delegate
+        // doesn&#39;t get run by IBDesignable. So we are setting up the global
+        // stylesheet that we want used for IBDesignable rendering here.
+      open override func prepareForInterfaceBuilder() &#123;
+          Stylish.stylesheet = Graphite()
+      &#125;
+  &#125;
+
+  // In order to force IBDesignable to compile and use code from this hosting
+  // app (specifically, the prepareForInterfaceBuilder() override above where
+  // we set the global stylesheet for use during IBDesignable rendering), we
+  // need to either 1) Create an IBDesignable view inside the host app
+  // (like ProgressBar, in this case) and actually place an instance of it
+  // on the storyboard or 2) Override prepareForInterfaceBuilder in one
+  // Stylish&#39;s included styleable components here in the host app. Note that
+  // it must be one of the Stylish components actually in use on the storyboard,
+  // so it might not be StyleableUIView in your app, but might instead be
+  // StyleableUILabel, StyleableUIButton, etc.
+  extension StyleableUIView &#123;
+      open override func prepareForInterfaceBuilder() &#123;
+          super.prepareForInterfaceBuilder()
+      &#125;
+  &#125;
+</code></pre>
+</li>
+</ul>
+<h1 id="Create-Styles"><a href="#Create-Styles" class="headerlink" title="Create Styles"></a>Create Styles</h1><p>You will need to first create a stylesheet.</p>
+<ul>
+<li><p>Create an object <code>AppStyles.swift</code> (Use your own preferred name for the object).</p>
+</li>
+<li><p>Create the styles you want, you can add more styles later if needed to suit your need. Here is an example to setup the font, text color, and text alignment. If you want to see more examples, I can attach some examples at the end of this note.</p>
+<pre><code>  struct HeaderText: Style &#123;
+          var propertyStylers = [
+              font.set(value: .systemFont(ofSize: 20.0)),
+              textColor.set(value: .darkGray),
+              textAlignment.set(value: .left)
+          ]
+  &#125;
+</code></pre>
+</li>
+<li><p>After creating the style, you need to create a styles dictionary that defines a mapping of style names to style instances.</p>
+<pre><code>  let styles: [String : Style] = [
+          &quot;HeaderText&quot;: HeaderText()
+  ]
+</code></pre>
+</li>
+<li><p>So this is what <code>AppStyles.swift</code> looks like with one style <code>HeaderText</code>:</p>
+<pre><code>  class AppStyle: Stylesheet &#123;
+      let styles: [String: Style] = [
+      &quot;HeaderText&quot;: HeaderText()
+    ]
+
+    struct HeaderText: Style &#123;
+          var propertyStylers = [
+              font.set(value: .systemFont(ofSize: 20.0)),
+              textColor.set(value: .darkGray),
+              textAlignment.set(value: .left)
+          ]
+    &#125;
+  &#125;
+</code></pre>
+</li>
+</ul>
+<h1 id="Use-Styles"><a href="#Use-Styles" class="headerlink" title="Use Styles"></a>Use Styles</h1><p>To use the style you created, you can create the view (Here we use <code>UILabel</code> as an example) in the desired place of storyboard or <code>.xib</code> file.</p>
+<ul>
+<li><p>Change the <code>UILabel</code> to <code>StyleableUILabel</code> in the identity inspector</p>
+<p>  <img src="CleanShot_2020-02-08_at_11.10.182x.png"></p>
+</li>
+<li><p>Enter the styles name <code>HeaderText</code> in the attributes inspector.</p>
+<p>  <img src="CleanShot_2020-02-08_at_11.27.012x.png"></p>
+</li>
+<li><p>Now you should see the label changed to the style <code>HeaderText</code></p>
+</li>
+<li><p>If you see a red box around the view, then you will need to refresh the view to make it work. Select <code>.xib</code> or <code>.storyboard</code> file in the project inspector, then Editor → Refresh all Views. <strong>Make sure it needs to select on the file in project inspector.</strong> After you select refresh all views, you will see a progress bar building the project in Xcode. (If you didn’t see the progress bar, then you didn’t select the file. Click on the file and try it again!)</p>
+<p>  <img src="CleanShot_2020-02-08_at_11.32.492x.png"></p>
+</li>
+<li><p>If you still see a red box, then check the style name. If you see an error message and a blank view, then you have some error in the stylesheet or the styleable view you used. It doesn’t give very nice error message. Try to debug by removing the code to see which code is having the issue.</p>
+</li>
+</ul>
+<h1 id="Custom-Styleable-View"><a href="#Custom-Styleable-View" class="headerlink" title="Custom Styleable View"></a>Custom Styleable View</h1><p>The framework comes with <code>StyleableUIView</code>, <code>StyleableUILabel</code>, <code>StyleableUITextField</code>, <code>StyleableUITextView</code>, <code>StyelableUIButton</code>, and <code>StyleableUIImageView</code>. You can always create a Styleable View for yourself if needed.</p>
+<ul>
+<li><p>For example, I created a <code>RateView</code> which adapt to <code>Styleable</code> protocol. The benefit is that you can see the realtime effect in <code>.xib</code> or <code>storyboard</code> where you use it. Otherwise, you will only see a white space when you use a normal view inside any <code>.xib</code> or <code>storyboard</code>.</p>
+<p>  <img src="StyleableRateView-Test.gif"></p>
+</li>
+</ul>
+<h2 id="How-to-Create-a-Custom-Styleable-View"><a href="#How-to-Create-a-Custom-Styleable-View" class="headerlink" title="How to Create a Custom Styleable View"></a>How to Create a Custom Styleable View</h2><p>To create the custom styleable view, you will need to create a view normally first. Here I use the <code>RateView</code> as an example. First step is to create the view itself:</p>
+<ul>
+<li><p>Create the <code>RateView</code> extends <code>UIView</code>. Remember to mark this object <code>@IBDesignable</code></p>
+</li>
+<li><p>Create <code>init</code> function</p>
+<pre><code>  override init(frame: CGRect) &#123;
+          super.init(frame: frame)
+          setImageViews(size: maxRating)
+      &#125;
+
+      required init?(coder: NSCoder) &#123;
+          super.init(coder: coder)
+          setImageViews(size: maxRating)
+      &#125;
+</code></pre>
+<p>  Inside <code>init</code> function setup the view, create all the constraint. (Assuming we create this <code>UIView</code> programmatically).</p>
+</li>
+<li><p>Create a redraw function that will redraw the view when data changes.</p>
+</li>
+<li><p>Try building this view and run it to make sure this view is all good. This is to avoid any issue on view itself.</p>
+</li>
+</ul>
+<p>After creating the normal view, we will now prepare to make this view styleable:</p>
+<ul>
+<li><p>Extend <code>RateView</code> to implement <code>Styleable</code> protocol.</p>
+</li>
+<li><p>Create <code>Styles</code> and <code>Stylesheet</code> to adapt to <code>Styleable</code> protocol. When we apply the styles and stylesheet make sure to redraw to apply the changes. Note that you will need to make them <code>@IBInspectable</code> to able to change in the interface builder.</p>
+<pre><code>  @IBInspectable var styles: String = &quot;&quot; &#123;
+          didSet &#123;
+              redraw(rating: currentRating)
+              Stylish.applyStyleNames(styles, to: self, using: stylesheet)
+          &#125;
+      &#125;
+
+  @IBInspectable var stylesheet: String? = nil &#123;
+          didSet &#123;
+              redraw(rating: currentRating)
+              Stylish.applyStyleNames(styles, to: self, using: stylesheet)
+          &#125;
+      &#125;
+</code></pre>
+</li>
+</ul>
+<p>Now you should able to see the view in <code>.xib</code> or <code>.storyboard</code> where uses the view. If you want to create stylesheet to customize the view, here is the additional step to add to the <code>RateView</code>:</p>
+<ul>
+<li><p>Create a <code>PropertyStyler</code> like below. You can change the value and target to type you want. If its an int, then value will be <code>Int?</code>, and target will be your own view. Because I added to <code>RateView</code> so target is <code>RateView</code>. Inside <code>PropertyStyler</code>‘s <code>apply</code> function, you will need to assign the value to a class property if needed and redraw the view with the new value.</p>
+<pre><code>  struct RateColor: PropertyStyler &#123;
+          static var propertyKey: String &#123; return &quot;rateColor&quot; &#125;
+          static func apply(value: UIColor?, to target: RateView, using bundle: Bundle) &#123;
+              target.tintImageColor = value
+              target.redraw(rating: target.currentRating)
+          &#125;
+      &#125;
+</code></pre>
+</li>
+<li><p>Create property stylers array to expose the property styler you created.</p>
+<pre><code>  static var propertyStylers: [AnyPropertyStylerType.Type] &#123;
+          return [RateColor.self]
+      &#125;
+</code></pre>
+</li>
+<li><p>(This is optional) Make type alias to make access to the struct easier. Always extension to <code>Style</code> even if you put this in <code>RateView.swift</code>.</p>
+<pre><code>  extension Style &#123;
+      /// Sets the star image tint color for the ratings.
+      typealias rateColor = RateView.RateColor
+  &#125;
+</code></pre>
+</li>
+</ul>
+<p>How to use the custom styles I just created? Inside the stylesheet for your app, you can create the structure like this:</p>
+<pre><code>struct RateView : Style &#123;
+        var propertyStylers = [
+            rateColor.set(value: secondaryColor)
+        ]
+    &#125;
+</code></pre>
+<ul>
+<li><p>Full code for <code>RateView.swift</code></p>
+<pre><code>  @IBDesignable class RateView: UIView, Styleable &#123;
+
+      struct RateColor: PropertyStyler &#123;
+          static var propertyKey: String &#123; return &quot;rateColor&quot; &#125;
+          static func apply(value: UIColor?, to target: RateView, using bundle: Bundle) &#123;
+              target.tintImageColor = value
+              target.redraw(rating: target.currentRating)
+          &#125;
+      &#125;
+
+      static var propertyStylers: [AnyPropertyStylerType.Type] &#123;
+          return [RateColor.self]
+      &#125;
+
+      @IBInspectable var styles: String = &quot;&quot; &#123;
+          didSet &#123;
+              redraw(rating: currentRating)
+              Stylish.applyStyleNames(styles, to: self, using: stylesheet)
+          &#125;
+      &#125;
+
+      @IBInspectable var stylesheet: String? = nil &#123;
+          didSet &#123;
+              redraw(rating: currentRating)
+              Stylish.applyStyleNames(styles, to: self, using: stylesheet)
+          &#125;
+      &#125;
+
+      static let STAR_WIDTH: CGFloat = 18.0
+      static let STAR_HEIGHT: CGFloat = 18.0
+      static let STAR_INNER_PADDING: CGFloat = 0.0
+
+      static let IMAGE_STAR_EMPTY: UIImage = UIImage(named: &quot;ic_star_empty&quot;, in: Bundle.current, compatibleWith: nil)!
+      static let IMAGE_STAR_FULL: UIImage = UIImage(named: &quot;ic_star_full&quot;, in: Bundle.current, compatibleWith: nil)!
+      static let IMAGE_STAR_HALF: UIImage = UIImage(named: &quot;ic_star_half&quot;, in: Bundle.current, compatibleWith: nil)!
+
+      private var imageViews: [UIImageView] = []
+
+      @IBInspectable var maxRating: Int = 5 &#123;
+          didSet &#123;
+              setImageViews(size: maxRating)
+              redraw(rating: currentRating)
+          &#125;
+      &#125;
+
+      @IBInspectable var currentRating: Double = 1 &#123;
+          didSet &#123;
+              redraw(rating: currentRating)
+          &#125;
+      &#125;
+
+      var tintImageColor: UIColor?
+
+      override init(frame: CGRect) &#123;
+          super.init(frame: frame)
+          setImageViews(size: maxRating)
+      &#125;
+
+      required init?(coder: NSCoder) &#123;
+          super.init(coder: coder)
+          setImageViews(size: maxRating)
+      &#125;
+
+      /// Setup the image view. Only call this function if the max value of rating has been changed.
+      /// - Parameter size: The max value for the rating.
+      private func setImageViews(size: Int) &#123;
+
+          // Clear imageView if there are existing ones.
+          imageViews.forEach &#123; x in x.removeFromSuperview() &#125;
+          imageViews.removeAll()
+
+          for i in 0..&lt;size &#123;
+              let imageView = UIImageView()
+              imageView.translatesAutoresizingMaskIntoConstraints = false
+              addSubview(imageView)
+
+              // Setup constraint
+              NSLayoutConstraint(item: imageView,
+                                 attribute: .width,
+                                 relatedBy: .equal,
+                                 toItem: nil,
+                                 attribute: .notAnAttribute,
+                                 multiplier: 1.0,
+                                 constant: RateView.STAR_WIDTH).isActive = true
+
+              NSLayoutConstraint(item: imageView,
+                                 attribute: .height,
+                                 relatedBy: .equal,
+                                 toItem: nil,
+                                 attribute: .notAnAttribute,
+                                 multiplier: 1.0,
+                                 constant: RateView.STAR_HEIGHT).isActive = true
+
+              // Leading
+              if let last = imageViews.last &#123;
+                  // Not first leading
+                  NSLayoutConstraint(item: imageView,
+                                     attribute: .leading,
+                                     relatedBy: .equal,
+                                     toItem: last,
+                                     attribute: .trailing,
+                                     multiplier: 1.0,
+                                     constant: RateView.STAR_INNER_PADDING).isActive = true
+              &#125; else &#123;
+                  // First leading
+                  NSLayoutConstraint(item: imageView,
+                                     attribute: .leading,
+                                     relatedBy: .equal,
+                                     toItem: self,
+                                     attribute: .leading,
+                                     multiplier: 1.0,
+                                     constant: 0.0).isActive = true
+
+              &#125;
+
+              // Top
+              NSLayoutConstraint(item: imageView,
+                                 attribute: .top,
+                                 relatedBy: .equal,
+                                 toItem: self,
+                                 attribute: .top,
+                                 multiplier: 1.0,
+                                 constant: 0.0).isActive = true
+
+              // Bottom
+              NSLayoutConstraint(item: imageView,
+                                 attribute: .bottom,
+                                 relatedBy: .equal,
+                                 toItem: self,
+                                 attribute: .bottom,
+                                 multiplier: 1.0,
+                                 constant: 0.0).isActive = true
+
+              // Last Trailing
+              if (i == size - 1) &#123;
+                  NSLayoutConstraint(item: imageView,
+                                     attribute: .trailing,
+                                     relatedBy: .equal,
+                                     toItem: self,
+                                     attribute: .trailing,
+                                     multiplier: 1.0,
+                                     constant: 0.0).isActive = true
+              &#125;
+
+              imageViews.append(imageView)
+
+          &#125;
+      &#125;
+
+      /// Display the rating based on the number provided. If you want to refresh the rate, assign to `currentRate` it will refresh automatically.
+      /// - Parameter rating: How many filled stars to display. Currently although it is a double, it will only support .5 rating. So if its 4.1 or 4.9, it will treated like 4.5
+      private func redraw(rating: Double) &#123;
+          // Apply current rating
+          let intRating: Int = Int(floor(rating))
+          for (index, imageView) in imageViews.enumerated() &#123;
+              if index == intRating - 1 &#123;
+                  // last element of rating
+                  imageView.image = Double(intRating) &lt; rating ? RateView.IMAGE_STAR_HALF : RateView.IMAGE_STAR_FULL
+              &#125; else if index &lt; intRating &#123;
+                  imageView.image = RateView.IMAGE_STAR_FULL
+              &#125; else &#123;
+                  imageView.image = RateView.IMAGE_STAR_EMPTY
+              &#125;
+
+              // Tint image color
+              if let tintImageColor = tintImageColor &#123;
+                  imageView.image = imageView.image?.withTintColor(tintImageColor)
+              &#125;
+          &#125;
+      &#125;
+  &#125;
+
+  extension Style &#123;
+      /// Sets the star image tint color for the ratings.
+      typealias rateColor = RateView.RateColor
+  &#125;
+</code></pre>
+</li>
+</ul>
+<h1 id="Trouble-Shooting"><a href="#Trouble-Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h1><p>If you see any error and don’t know why, try to see if you access to the asset folder with out specify the bundle. I had several times that access to image or color from the asset directly and creating the problem. Took me long time to figure this out. So check your code, make sure it does not do anything like this:</p>
+<pre><code>// Do not do this
+UIImage(named: &quot;ic_star_empty&quot;)!
+
+// Do this.
+UIImage(named: &quot;ic_star_empty&quot;, in: Bundle(identifier: &quot;com.xxx.xxxxx&quot;), compatibleWith: nil)!
+
+// Do not do this
+UIColor(named: key.rawValue)!
+
+// Do this
+UIColor(named: key.rawValue, in: Bundle(identifier: &quot;com.xxx.xxxxx&quot;), compatibleWith: nil)
+</code></pre>
+<h1 id="More-Examples-for-Style"><a href="#More-Examples-for-Style" class="headerlink" title="More Examples for Style:"></a>More Examples for Style:</h1><ul>
+<li><p>Button</p>
+<pre><code>  struct DefaultButton : Style &#123;
+          var propertyStylers = [
+              titleColorForNormalState.set(value: UIColor(red:0.21, green:0.29, blue:0.36, alpha:1.0)),
+              titleColorForHighlightedState.set(value: UIColor(red:0.18, green:0.24, blue:0.31, alpha:1.0)),
+              titleColorForDisabledState.set(value: UIColor(red:0.18, green:0.24, blue:0.31, alpha:1.0)),
+              cornerRadiusRatio.set(value: 0.16),
+              borderWidth.set(value: 1.0),
+              borderColor.set(value: UIColor(red:0.21, green:0.29, blue:0.36, alpha:1.0)),
+              backgroundColor.set(value: UIColor(white: 0.82, alpha: 1.0))
+          ]
+      &#125;
+</code></pre>
+</li>
+<li><p>Set text</p>
+<pre><code>  struct StylesheetTitle : Style &#123;
+          var propertyStylers = [text.set(value: &quot;Graphite&quot;)]
+      &#125;
+</code></pre>
+</li>
+<li><p>Set image</p>
+<pre><code>  struct ThemeImage : Style &#123;
+          var propertyStylers = [image.set(value: UIImage(named: &quot;stone&quot;, in:  Bundle(for: ProgressBar.self), compatibleWith: nil))]
+      &#125;
+</code></pre>
+</li>
+<li><p>Set round corner</p>
+<pre><code>  struct RoundedStyle : Style &#123;
+      var propertyStylers = [cornerRadius.set(value: 30.0), masksToBounds.set(value: true)]
+  &#125;
+</code></pre>
+</li>
+</ul>
+<p>Note that you will also able to read a <code>json</code> stylesheet instead of writing all the styles by code. For detail, download the example project and learn from there.</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2021/04/15/Detect%20When%20Application%20Goes%20to%20Background%20or%20Become%20Active%20From%20Background/" class="prev">PREV</a><a href="/2019/09/22/Download%20Old%20Version%20Of%20Xcode/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2021 <a href="http://blog.jerryshan.com">Tianyun Shan</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script></body></html>

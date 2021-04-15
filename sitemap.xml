@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2021/04/15/Detect%2520When%2520Application%2520Goes%2520to%2520Background%2520or%2520Become%2520Active%2520From%2520Background/</loc>
+    
+    <lastmod>2021-04-15T19:04:15.764Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/03/07/iTunes%2520Connect%2520Encryption%2520Information/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.932Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/06/24/iTunes%2520Connect%2520Build%2520Not%2520Found%2520With%2520Application%2520Loader/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.931Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2016/11/02/iOS%2520Location%2520Service/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.929Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/06/28/iOS%2520Multiple%2520Firebase%2520Apps%2520For%2520One%2520Project/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.929Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2016/12/14/iOS%2520Settings%2520Bundle/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.929Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/01/16/iOS%2520Coding%2520Guideline/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.928Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/15/Wrong%2520View%2520Size%2520In%2520Decoration/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.919Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/01/24/Xcode%2520Keyboard%2520Shortcut%2520Cheatsheet/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.919Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/03/29/Use%2520Svn%2520-%2520Quick%2520Svn%2520Tutorial/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.912Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/12/05/Wait%2520Until%2520Async%2520Finishes/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.912Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/04/13/Web%2520Develop%2520Environment%2520-%2520Apache%2520in%2520macOS%2520Sierra%252010.12/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.912Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/08/01/Wireless%2520Debugging/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.912Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/02/09/Swift%25204%2520Codable/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.909Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/09/22/Swift%2520Optional%2520Protocol%2520Methods/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.909Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/04/19/Timer%2520On%2520Background%2520Thread/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.909Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/03/03/Todo%2520Tags%2520In%2520Xcode/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.909Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/24/Troubleshooting%2520For%2520GraphQL/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.909Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/07/11/Upgrade%2520Marketing%2520Cloud%2520SDK/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.909Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/07/10/Upload%2520Missing%2520Required%2520DSYMs/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.909Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2016/10/19/Spacemacs%2520Config%2520-%2520How%2520I%2520Organize%2520Tasks%2520and%2520Notes/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.834Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2020/02/06/Stylish%2520Framework/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.834Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/02/12/Retain%2520Cycle%2520With%2520Array%2520Or%2520Dictionary/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.832Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2016/06/13/SSH%2520Key/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.832Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/03/18/Set%2520Corner%2520Radius%2520For%2520Different%2520Corner/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.832Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/06/28/Setup%2520APN%2520Notification/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.832Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/05/19/Repeated%2520Animation/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.831Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/02/17/Responsive%2520Header%2520Over%2520Image/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.831Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2016/11/04/Pass%2520Type%2520As%2520Parameter/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.816Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/04/21/Protected%2520Property%2520In%2520Objective-C/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.816Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2016/11/07/Protobuf%2520Swift/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.816Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/02/06/Regression%2520and%2520Classification/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.816Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/03/02/Lag%2520When%2520Setting%2520Image%2520To%2520UIImageView/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.813Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/06/20/Multiple%2520Dex%2520Files%2520Define%2520Problem/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.813Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/04/02/Network%2520Reachability%2520With%2520Alamofire/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.813Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/08/26/Install%2520Piwik%2520On%2520Linux/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.812Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/08/02/Install%2520or%2520Use%2520Specific%2520Version%2520of%2520Cocoapods/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.812Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/06/25/Kotlin%2520Lambda%2520Deep%2520Look./</loc>
+    
+    <lastmod>2021-04-15T18:51:31.812Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/06/25/Kotlin%2520Unwrap%2520Optional%2520Variable/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.812Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/06/10/How%2520to%2520Close%2520Realm%2520Database/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.811Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2016/11/04/How%2520to%2520Setup%2520And%2520Write%2520Blog%2520Using%2520Org%2520And%2520Hexo/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.811Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/01/26/How%2520to%2520Write%2520Blog%2520With%2520Pure%2520Plain%2520Text%2520MarkDown/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.811Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/13/ImageView%2520Drawable%2520Crash%2520On%2520Vector%2520Source/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.811Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/11/09/Import%2520Third-Party%2520Objective-C%2520Framework%2520into%2520Swift%2520Framework%2520Project/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.811Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/11/12/Init%2520Core%2520Data%2520For%2520Framework%2520Projects/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.811Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/11/12/Init%2520View%2520Controller%2520For%2520Framework%2520Projects/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.811Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/01/15/How%2520to%2520Build%2520Static%2520Library%2520With%2520Both%2520Architecture/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.810Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/07/09/Fish%2520Terminal%2520Fuzzy%2520Finding%2520%25E2%2580%259Cfzf%25E2%2580%259D/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.804Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/04/10/Generate%2520Class%2520Reference/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.804Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/07/17/Generate%2520GraphQL%2520Docs/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.804Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/09/03/Get%2520Current%2520Device%2520Language%2520For%2520iOS/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.804Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/04/21/Get%2520Current%2520Wifi%2520Connection/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.804Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/01/17/Git%2520Bash%2520Scripting/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.804Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/12/04/Git%2520Cheatsheet/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.804Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/07/02/Github%2520IO%2520Pages%2520Custom%2520Domain/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.804Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/06/25/Firebase%2520Cloud%2520Messaging%2520Send%2520Message%2520Via%2520HTTP%2520Protocol/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.802Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/06/25/Firebase%2520Cloud%2520Messaging%2520Setup/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.802Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/01/16/Echo%2520With%2520Color/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.800Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/04/08/File%2520Management%2520in%2520Swift/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.800Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/06/30/Finding%2520Lane%2520Lines%2520-%2520Self%2520Driving/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.800Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/07/20/Dynamic%2520UITextView%2520Height%2520With%2520Auto%2520Layout/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.799Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/15/Dynamically%2520Get%2520Screen%2520Element%2520Size/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.799Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/03/19/Dynamic%2520Height%2520Table%2520View/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.798Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/15/Dismiss%2520Keyboard%2520After%2520Leaving%2520Fragment/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.792Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/07/17/Download%2520GraphQL%2520Schema/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.792Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/09/22/Download%2520Old%2520Version%2520Of%2520Xcode/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.792Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/03/Custom%2520Cell%2520Space%2520For%2520RecyclerView/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.791Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/07/10/Date%2520Formatter/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.791Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/06/Detect%2520Motion%2520Event%2520On%2520Screen/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.791Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/16/Detect%2520User%2520Scroll%2520For%2520Analytics/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.791Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/13/Device%2520Screen%2520Size/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.791Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/23/Create%2520Tab%2520Layout/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.790Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/04/19/Create%2520Custom%2520Delegate/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.789Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/01/17/Create%2520C++%2520Static%2520Library%2520and%2520Use%2520in%2520Swift/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.783Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/03/18/Container%2520View%2520Controller%2520with%2520Autolayout/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.782Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/05/05/Convert%2520Byte%2520Array%2520to%2520Data%2520and%2520to%2520Int/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.782Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/11/09/Copy%2520Product%2520Framework%2520File/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.782Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/16/Catch%2520Tap%2520Action%2520In%2520Motion%2520Event/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.781Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/02/03/Change%2520Icon%2520Color%2520Programmatically/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.781Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2016/10/21/Config%2520ScrollView%2520With%2520Autolayout%2520in%2520Interface%2520Builder/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.781Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/09/10/Attributed%2520String%2520For%2520TextView%2520(Spannable%2520String)/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.779Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2016/11/08/Basic%2520of%2520Core%2520Data%2520Framework/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.779Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/05/02/Android%2520Bluetooth%2520LE%2520Peripheral/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.778Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/06/13/Android%2520Custom%2520Deep%2520Link/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.778Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2018/08/07/Android%2520Java%2520Enum/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.778Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/08/15/Android%2520Localization%2520Export/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.778Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/07/28/Android%2520Multiple%2520Firebase%2520Apps%2520For%2520One%2520Project/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.778Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2017/05/02/Apple%2520Bluetooth%2520LE%2520Central/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.778Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/07/10/Add%2520Test%2520Device%2520To%2520Bitrise%2520Manually/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.777Z</lastmod>
+    
+  </url>
+  
+</urlset>

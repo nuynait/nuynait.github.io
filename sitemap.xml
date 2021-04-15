@@ -296,13 +296,6 @@
   </url>
   
   <url>
-    <loc>http://blog.jerryshan.com/2019/05/13/ImageView%2520Drawable%2520Crash%2520On%2520Vector%2520Source/</loc>
-    
-    <lastmod>2021-04-15T18:51:31.811Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.jerryshan.com/2017/11/09/Import%2520Third-Party%2520Objective-C%2520Framework%2520into%2520Swift%2520Framework%2520Project/</loc>
     
     <lastmod>2021-04-15T18:51:31.811Z</lastmod>
@@ -311,6 +304,13 @@
   
   <url>
     <loc>http://blog.jerryshan.com/2017/11/12/Init%2520Core%2520Data%2520For%2520Framework%2520Projects/</loc>
+    
+    <lastmod>2021-04-15T18:51:31.811Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.jerryshan.com/2019/05/13/ImageView%2520Drawable%2520Crash%2520On%2520Vector%2520Source/</loc>
     
     <lastmod>2021-04-15T18:51:31.811Z</lastmod>
     
@@ -373,14 +373,14 @@
   </url>
   
   <url>
-    <loc>http://blog.jerryshan.com/2018/12/04/Git%2520Cheatsheet/</loc>
+    <loc>http://blog.jerryshan.com/2018/07/02/Github%2520IO%2520Pages%2520Custom%2520Domain/</loc>
     
     <lastmod>2021-04-15T18:51:31.804Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.jerryshan.com/2018/07/02/Github%2520IO%2520Pages%2520Custom%2520Domain/</loc>
+    <loc>http://blog.jerryshan.com/2018/12/04/Git%2520Cheatsheet/</loc>
     
     <lastmod>2021-04-15T18:51:31.804Z</lastmod>
     
@@ -464,14 +464,14 @@
   </url>
   
   <url>
-    <loc>http://blog.jerryshan.com/2019/05/03/Custom%2520Cell%2520Space%2520For%2520RecyclerView/</loc>
+    <loc>http://blog.jerryshan.com/2019/07/10/Date%2520Formatter/</loc>
     
     <lastmod>2021-04-15T18:51:31.791Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.jerryshan.com/2019/07/10/Date%2520Formatter/</loc>
+    <loc>http://blog.jerryshan.com/2019/05/03/Custom%2520Cell%2520Space%2520For%2520RecyclerView/</loc>
     
     <lastmod>2021-04-15T18:51:31.791Z</lastmod>
     
